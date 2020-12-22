@@ -1,0 +1,186 @@
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<form autocomplete="off" id="formProduct" class="" data-fv-framework="bootstrap4"
+data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" data-manner="<%= (productObj.id == undefined) ? 'add' : 'edit' %>">
+<input value="<%= productObj.id %>" id="id" name="id" hidden>
+  <div class="row">
+    <div class="col-lg-3 col-xlg-3 col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            Ảnh
+          </div>
+          <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+              <input data-default-file="<%= productObj.image ? productObj.image : '/images/product.png' %>" type="file"
+              class="dropify" name="thumbnail" data-field="thumbnail" data-max-file-size="3M" />
+          </div>
+        </div>
+       
+      </div>
+    </div>
+    <div class="col-lg-9 col-xlg-9 col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <%if (manner == 'add'){%>Thêm sản phẩm<%}else{%>Sửa sản phẩm<%}%>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Mã sản phẩm</label>
+                <div class="col-md-9">
+                  <input type="text" class="form-control" value="<%=(productObj.code) ? productObj.code : ''%>"
+                  placeholder="B001" name="code" id="code" data-fv-notempty="true"
+                  data-fv-notempty-message="<%= __('Mã sản phẩm là trường bắt buộc') %>" data-fv-stringlength="true"
+                  data-fv-stringlength-min="2" data-fv-stringlength-max="30"
+                  data-fv-stringlength-message="<%= __('Mã sản phẩm tối thiểu 2 ký tự và tối đa 30 ký tự.') %>" >
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Tiêu đề</label>
+                <div class="col-md-9">
+                  <input type="text" id="title" class="form-control" name="title" value="<%=(productObj.title) ? productObj.title : ''%>"
+                    data-fv-notempty="true" 
+                    data-fv-notempty-message="<%= __('Tên loại thương hiệu là trường bắt buộc') %>"
+                    data-fv-stringlength="true" data-fv-stringlength-min="3" data-fv-stringlength-max="70"
+                    data-fv-stringlength-message="<%= __('Tên thương hiệu tối thiểu 3 ký tự và tối đa 70 ký tự.') %>" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Giá nhập</label>
+                <div class="col-md-9">
+                  <div class="input-group">
+                    <input type="number" id="entryPrice" class="form-control" name="entryPrice" value="<%=(productObj.entryPrice) ? productObj.entryPrice : ''%>"
+                    data-fv-message="<%= __('Giá nhập là số') %>"
+                    data-fv-notempty="true" data-fv-notempty-message="<%= __('Giá nhập là trường bắt buộc') %>"
+                    max="10000000" min="0" data-fv-lessThan-message="<%= __('Số tiền tối đa là 10000000') %>" data-fv-greaterThan-message="<%= __('Số tiền tối thiểu là 0') %>" required>
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">đ
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Giá bán</label>
+                <div class="col-md-9">
+                  <div class="input-group">
+                    <input type="number" id="price" class="form-control" name="price" value="<%=(productObj.price) ? productObj.price : ''%>"
+                    data-fv-message="<%= __('Giá bán là số') %>"
+                    data-fv-notempty="true" data-fv-notempty-message="<%= __('Giá bán là trường bắt buộc') %>"
+                    max="10000000" min="0" data-fv-lessThan-message="<%= __('Số tiền tối đa là 12') %>" data-fv-greaterThan-message="<%= __('Số tiền tối thiểu là 0') %>" required>
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">đ
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Loại sản phẩm</label>
+                <div class="col-md-9">
+                    <select id="productTypebox" name="productTypebox" class="form-control js-process-basic-single  select2-single"
+                      data-placeholder="<%= __('Choose') %>" single="single" >
+                        <% _.each(productTypes, function (productType, index) { %>
+                        <%if(productObj.productType){%>
+                        <option value="<%= productType.id %>" <% if(productType.id == productObj.productType.id){ %>selected <%}else{ %>''<%}%>>
+                          <%= productType.title %>
+                        </option>
+                        <%}else{%>
+                          <option value="<%= productType.id %>">
+                            <%= productType.title %>
+                          </option>
+                        <%}%>
+                        <% }) %> 
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Thương hiệu</label>
+                <div class="col-md-9">
+                    <select id="brandbox" name="brandbox" class="form-control js-process-basic-single  select2-single"
+                      data-placeholder="<%= __('Choose') %>" single="single" >
+                        <% _.each(brands, function (brand, index) { %>
+                        <%if(productObj.brand){%>
+                        <option value="<%= brand.id %>" <% if(brand.id == productObj.brand.id){ %>selected <%}else{ %>''<%}%>>
+                          <%= brand.title %>
+                        </option>
+                        <%}else{%>
+                          <option value="<%= brand.id %>">
+                            <%= brand.title %>
+                          </option>
+                        <%}%>
+                        <% }) %> 
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row align-items-md-center">
+                  <label class="col-md-3">Mô tả</label>
+                  <div class="col-md-9">
+                    <input id="description" class="form-control" rows="2" name="description" value="<%=(productObj.description) ? productObj.description : ''%>">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group row align-items-md-center">
+                    <label class="col-md-3">Trạng thái</label>
+                    <div class="col-md-9">
+                      <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input id="statusActive" type="radio" class="form-check-input" name="status" <%if(productObj.status!=3){%>checked <%}%>
+                                value="<%= STATUS.ACTIVE %>">
+                              <i class="input-helper"></i>
+                              <%= __('Sử dụng') %>
+                            </label>
+                          </div>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="alert d-none" style="text-align:center" role="alert">
+              <i class="mdi mdi-alert-circle"></i>
+          </div>
+          <div class="modal-footer row-button-fluid">
+            <a class="btn btn-light"  href="/backend/product/index">Trở về</a>
+            <button id="btnFormProduct" type="submit" class="btn btn-primary waves-effect waves-classic">
+              <%= productObj.id ? 'Cập nhật' : 'Thêm mới' %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/product/form.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

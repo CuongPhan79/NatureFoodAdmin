@@ -1,0 +1,102 @@
+<form autocomplete="off" id="formProfile" class="" data-fv-framework="bootstrap4"
+    data-fv-message="<%= __('Giá trị nhập vào không hợp lệ') %>" data-fv-icon-valid="glyphicon glyphicon-ok"
+    data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh"
+    data-fv-live="enabled" data-id="<%- profile ? profile.id : '' -%>">
+    <div class="row">
+        <div class="col-lg-3 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Ảnh đại diện</div>
+                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                        <input data-default-file="<%= profile.avatar ? profile.avatar : '/images/avatar.png' %>" type="file"
+                        class="dropify" name="thumbnail" data-field="thumbnail" data-max-file-size="3M" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-xlg-9 col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Thông tin cá nhân</div>
+                    <div class="row">
+                        <div class="col-lg-6 col-xlg-6 col-md-6">
+                            <div class="form-group">
+                                    <label class="form-control-label">
+                                        <%= __('Họ') %>
+                                    </label>
+                                    <input value="<%= profile?profile.firstName:'' %>" type="text" class="form-control"
+                                        name="firstName" <%if(userActive.userType!=0){%> readonly<%}%> />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Địa chỉ Email') %>
+                                </label>
+                                <input value="<%= profile?profile.emailAddress:'' %>" type="text" class="form-control"
+                                    data-fv-notempty="true" data-fv-notempty-message="<%= __('Email không được để trống') %>"
+                                    data-fv-message="<%= __('Định dạng email không hợp lệ') %>"
+                                    name="emailAddress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" readonly/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Số điện thoại') %>
+                                </label>
+                                <input value="<%= profile?profile.phone:'' %>" type="number" class="form-control"
+                                    data-fv-notempty="true" data-fv-notempty-message="<%= __('Số điện thoại không được để trống') %>"
+                                    data-fv-message="<%= __('Số điện thoại phải gồm 10 hoặc 11 chữ số') %>"
+                                    name="phone" pattern="[0-9]{10,11}$" <%if(userActive.userType!=0){%> readonly<%}%> />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Mật khẩu') %>
+                                </label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    data-fv-message="<%= __('Mật khẩu phải dài ít nhất 6 kí tự và bao gồm số, chữ in hoa, chữ in thường.') %>"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xlg-6 col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Tên') %>
+                                </label>
+                                <input value="<%= profile?profile.lastName:'' %>" type="text" class="form-control"
+                                    name="lastName" <%if(userActive.userType!=0){%> readonly<%}%>/>
+                            </div>
+                            <div class="form-group">
+                                <label for="birthDate" class="form-control-label">Ngày sinh</label>
+                                <input value="<%= profile?profile.birthday:'' %>" type="date" id="birthDate"
+                                    class="form-control" name="dateOfBirth" <%if(userActive.userType!=0){%> readonly<%}%>>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Địa chỉ') %>
+                                </label>
+                                <input value="<%= profile?profile.address:'' %>" type="text" class="form-control"
+                                    name="address" <%if(userActive.userType!=0){%> readonly<%}%>/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label">
+                                    <%= __('Nhập lại mật khẩu') %>
+                                </label>
+                                <input type="password" class="form-control" name="passwordConfirm" id="confirm_password" />
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="alert d-none" style="text-align:center" role="alert">
+                        <i class="mdi mdi-alert-circle"></i>
+                    </div>
+                    <div class="modal-footer row-button-fluid">
+                        <a href="/backend/dashboard" class="btn btn-default btn-outline btn-reset-page-account waves-effect waves-classic">
+                            <%= __('Trang chủ') %>
+                        </a>
+                        <button id="btnFormProfile" type="submit" class="btn btn-primary waves-effect waves-classic">
+                            <%= __('Cập nhật') %>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

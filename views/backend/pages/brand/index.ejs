@@ -1,0 +1,133 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= __('Danh sách thương hiệu') %></h4>
+    <div class="row">
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div>
+          <div class="dropdown float-left md-3">
+            <button type="button" class="btn btn-dark  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <%= __('Hành động') %>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <%if(status==3){%>
+              <a class="dropdown-item act-trash-group" href="javascript:void(0)">
+                <%= __('Xoá') %>
+              </a>
+              <%}else{%>
+              <a class="dropdown-item act-trash-group" href="javascript:void(0)">
+                <%= __('Thùng rác') %>
+              </a>
+              <%}%>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link <% if(status == 1) {%> active <% } %>" href="<%= BACKEND.ACTIVE.URL %>">
+              <%= __('Sử dụng') %>
+              <span class="badge badge-pill <%=(status == 1)? 'badge-primary':'badge-outline-primary' %>">
+                <%= totalActive %>
+              </span>
+              </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link <% if(status == 3) {%> active <% } %>" href="<%= BACKEND.TRASH.URL %>">
+                  <%= __('Thùng rác') %>
+                  <span class="badge badge-pill <%=(status == 3)? 'badge-primary':'badge-outline-primary' %>">
+                    <%= totalTrash %>
+                  </span>
+                </a>
+              </li>
+              </ul>
+              <div class="md-3">
+                <button id="btnAdd" type="button" class="btn btn-primary btn-icon-text btn-sm text-uppercase"
+                  data-toggle="modal" data-target="#modal-edit">
+                  <i class="mdi mdi-plus"></i>Thêm thương hiệu 
+                </button>
+              </div>
+      </div>
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="table-responsive">
+            <%- partial('./_list.ejs') %>
+        </div>
+      </div>
+           
+    </div>
+
+  </div>
+</div>
+ <div class="modal fade modal-custom" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title-productType">Thêm thương hiệu</h5>
+        <button type="button" id="btnCloseModal" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="mdi mdi-close-circle-outline"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" id="formBrand" class="" data-fv-framework="bootstrap4"
+          data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+          data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" data-manner="add">
+          <div class="form-group row align-items-md-center">
+            <label class="col-md-3">Tiêu đề</label>
+            <div class="col-md-9">
+              <input type="text" id="title" class="form-control" name="title" data-fv-notempty="true"
+                data-fv-notempty-message="<%= __('Tên thương hiệu là trường bắt buộc') %>"
+                data-fv-stringlength="true" data-fv-stringlength-min="3" data-fv-stringlength-max="70"
+                data-fv-stringlength-message="<%= __('Tên thương hiệu tối thiểu 3 ký tự và tối đa 70 ký tự.') %>" />
+            </div>
+          </div>
+          <div class="form-group row align-items-md-center">
+            <label class="col-md-3">Mô tả</label>
+            <div class="col-md-9">
+              <textarea id="description" class="form-control" rows="2" name="description"></textarea>
+            </div>
+          </div>
+          <div class="form-group row align-items-md-center">
+            <label class="col-md-3">Trạng thái</label>
+            <div class="col-md-9">
+              <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input id="statusActive" type="radio" class="form-check-input" name="status" checked
+                        value="<%= STATUS.ACTIVE %>">
+                      <i class="input-helper"></i>
+                      <%= __('Sử dụng') %>
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="alert d-none" style="text-align:center" role="alert">
+            <i class="mdi mdi-alert-circle"></i>
+          </div>
+          <div class="modal-footer row-button-fluid">
+            <button type="reset" class="btn btn-light" data-dismiss="modal"
+              onclick="window.location.reload()">Hủy</button>
+            <button id="btnFormBrand" type="submit" class="btn btn-primary waves-effect waves-classic">
+              <%= __('Thêm mới') %>
+              <div hidden>
+                <%= __('Cập nhật')%>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+      <% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+      <% block('localScripts', '<script src="/js/backend/brand/index.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %></div>

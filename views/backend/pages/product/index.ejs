@@ -1,0 +1,73 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= __('Danh sách sản phẩm') %></h4>
+    <div class="row">
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div>
+          <div class="dropdown float-left md-3">
+            <button type="button" class="btn btn-dark  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <%= __('Hành động') %>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <%if(status==3){%>
+              <a class="dropdown-item act-trash-group" href="javascript:void(0)">
+                <%= __('Xoá') %>
+              </a>
+              <%}else{%>
+              <a class="dropdown-item act-trash-group" href="javascript:void(0)">
+                <%= __('Thùng rác') %>
+              </a>
+              <%}%>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link <% if(status == 1) {%> active <% } %>" href="<%= BACKEND.ACTIVE.URL %>">
+              <%= __('Sử dụng') %>
+              <span class="badge badge-pill <%=(status == 1)? 'badge-primary':'badge-outline-primary' %>">
+                <%= totalActive %>
+              </span>
+              </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link <% if(status == 3) {%> active <% } %>" href="<%= BACKEND.TRASH.URL %>">
+                  <%= __('Thùng rác') %>
+                  <span class="badge badge-pill <%=(status == 3)? 'badge-primary':'badge-outline-primary' %>">
+                    <%= totalTrash %>
+                  </span>
+                </a>
+              </li>
+              </ul>
+              <div class="md-3">
+                <a id="btnAdd"  class="btn btn-primary btn-icon-text btn-sm text-uppercase"
+                  href="form">
+                  <i class="mdi mdi-plus"></i>Thêm sản phẩm
+              </a>
+              </div>
+      </div>
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="table-responsive">
+            <%- partial('./_list.ejs') %>
+        </div>
+      </div>
+           
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/product/index.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

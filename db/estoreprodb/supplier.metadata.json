@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"estoreprodb.supplier"}],"uuid":"3822711665c34db798844d538a85d9d8"}

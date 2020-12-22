@@ -1,0 +1,101 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= __('Danh sách nhà cung cấp') %></h4>
+    <div class="row">
+        <div class="col-md-12 grid-margin d-flex justify-content-between">
+            <div class="md-6 text-right">
+            </div>
+            <div class="md-6 text-right">
+                <button id="btnAdd" type="button" class="btn btn-primary btn-icon-text btn-sm text-uppercase"
+                data-toggle="modal" data-target="#modal-edit">
+                <i class="mdi mdi-plus"></i>Thêm nhà cung cấp
+                </button>
+            </div>
+        </div>
+        <div class="col-md-12 grid-margin d-flex justify-content-between">
+            <div class="table-responsive">
+                <%- partial('./_list.ejs') %>
+            </div>
+        </div>
+           
+    </div>
+  </div>
+</div>
+<div class="modal fade modal-custom" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title-productType">Thêm nhà cung cấp</h5>
+        <button type="button" id="btnCloseModal" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="mdi mdi-close-circle-outline"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form autocomplete="off" id="formSupplier" class="" data-fv-framework="bootstrap4"
+          data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+          data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" data-manner="add">
+          <div class="form-group row align-items-md-center">
+            <label class="col-md-3">Tên</label>
+            <div class="col-md-9">
+              <input type="text" id="name" class="form-control" name="name" data-fv-notempty="true"
+                data-fv-notempty-message="<%= __('Tên nhà cung cấp là trường bắt buộc') %>"
+                data-fv-stringlength="true" data-fv-stringlength-min="3" data-fv-stringlength-max="70"
+                data-fv-stringlength-message="<%= __('Tên nhà cung cấp tối thiểu 3 ký tự và tối đa 70 ký tự.') %>" />
+            </div>
+          </div>
+          <div class="form-group row align-items-md-center">
+              <label class="col-md-3">Email</label>
+              <div class="col-md-9">
+                <input type="text" class="form-control" name="email" id="email"
+                data-fv-notempty="true" data-fv-notempty-message="<%= __('Email là trường bắt buộc') %>"
+                pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                data-fv-message="<%= __('Định dạng email không hợp lệ') %>" required>
+              </div>
+          </div>
+          <div class="form-group row align-items-md-center">
+              <label class="col-md-3">Số điện thoại</label>
+              <div class="col-md-9">
+                <input id="phone" type="number" class="form-control" name="phone"
+                pattern="[0-9]{10,11}$" data-fv-notempty="true" data-fv-notempty-message="<%= __('Số điện thoại là trường bắt buộc') %>"
+                data-fv-message="<%= __('Số điện thoại phải gồm 10 hoặc 11 chữ số') %>" data-fv-stringlength="true"
+                data-fv-stringlength-max="11" required>
+              </div>
+          </div>
+          <div class="form-group row align-items-md-center">
+              <label class="col-md-3">Địa chỉ</label>
+              <div class="col-md-9">
+                <input type="text" id="address" class="form-control" name="address" data-fv-notempty="true"
+                  data-fv-notempty-message="<%= __('Địa chỉ là trường bắt buộc') %>"/>
+              </div>
+          </div>
+          <div class="alert d-none" style="text-align:center" role="alert">
+            <i class="mdi mdi-alert-circle"></i>
+          </div>
+          <div class="modal-footer row-button-fluid">
+            <button type="reset" class="btn btn-light" data-dismiss="modal"
+              onclick="window.location.reload()">Hủy</button>
+            <button id="btnFormSupplier" type="submit" class="btn btn-primary waves-effect waves-classic">
+              <%= __('Thêm mới') %>
+              <div hidden>
+                <%= __('Cập nhật')%>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      <% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+      <% block('localScripts', '<script src="/js/backend/supplier/index.js"></script>') %>
+      <% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %></div>

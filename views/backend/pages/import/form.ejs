@@ -1,0 +1,132 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<form autocomplete="off" id="formImport" class="" data-fv-framework="bootstrap4">
+    <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="col-md-8">
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <h4 class="card-title"><%= __('Thông tin nhà cung cấp') %></h4>
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Chọn nhà cung cấp</label>
+                        <div class="col-md-9">
+                            <select id="supplierBox" name="supplierBox" class="form-control js-process-basic-single  select2-single "
+                                data-placeholder="<%= __('Choose') %>" single="single" >
+                                <% _.each(suppliers, function (supplier, index) { %>
+                                    <option value="<%= supplier.id %>">
+                                        <p> <%=supplier.name %></p>        
+                                        (<span><%=supplier.phone %></span>)
+                                    </option>
+                                <% }) %> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <h4 class="card-title"><%= __('Danh sách sản phẩm') %></h4>
+                    <label class="col-md-3">Bao gồm</label>
+                    <div class="col-md-12">
+                        <div id="rowItemTuition">
+                            <div id="rowContent0" class="row mb-2">
+                        
+                            <!-- <div class="col-md-2">
+                                <div class="btn-delItemTuition">
+                                <a id="delSlotItem" data-index="0" class="removeItem" href="javascript:void(0)">
+                                    <%= __('Xoá') %>
+                                </a>
+                                </div>
+                            </div> -->
+                            
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <button id="addItemTuition" type="button" class="mt-10 btn btn-link"><%= __('Thêm sản phẩm') %></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <div class="col-md-12 grid-margin d-flex justify-content-between">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row align-items-md-center">
+                                <label class="col-md-5">Tổng tiền: </label>
+                                <div class="col-md-1"></div>
+                                <label id="totalPrice" class="col-md-4">0</label>
+                                <label class="col-md-2">đ</label>
+                            </div>
+                            <div class="form-group row align-items-md-center">                            
+                                <label class="col-md-5">Chiết khấu</label>
+                                <div class="col-md-1"></div>
+                                <input id="discount" name="discount" value="0" type="number" class="form-control col-md-4">
+                                <label class="col-md-2">%</label>
+                                <div class="col-md-6"></div>
+                                <label id="discountval" class="col-md-4">0</label>
+                                <label class="col-md-2">đ</label>                             
+                            </div>
+                            <div class="form-group row align-items-md-center">
+                                <label class="col-md-5"><b>Tiền phải trả: </b></label>
+                                <div class="col-md-1"></div>
+                                <label class="col-md-4" id="pay">0</label>
+                                <label class="col-md-2"><b>đ</b></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <h4 class="card-title"><%= __('Thông tin nhập hàng') %></h4>
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Ngày nhập</label>
+                        <div class="col-md-9">
+                            <input type="date" value="<%= currentDay %>" id="description" class="form-control" rows="2" name="date" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Mã đơn nhập hàng</label>
+                        <div class="col-md-9">
+                            <input type="text" id="code" class="form-control" name="code" data-fv-notempty="true" value=<%=code%> readonly
+                            data-fv-notempty-message="<%= __('Mã nhập hàng là trường bắt buộc') %>"
+                            data-fv-stringlength="true" data-fv-stringlength-min="2" data-fv-stringlength-max="30"
+                            data-fv-stringlength-message="<%= __('Mã đơn nhập hàng tối thiểu 2 ký tự và tối đa 30 ký tự.') %>" />
+                        </div>
+                    </div>
+                   
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Ghi chú</label>
+                        <div class="col-md-9">
+                            <textarea id="description" class="form-control" rows="2" name="description"></textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="alert d-none" style="text-align:center" role="alert">
+                <i class="mdi mdi-alert-circle"></i>
+            </div>
+            <button id="btnFormImport" type="submit" class="btn btn-primary waves-effect waves-classic ">
+                    <%= __('Tạo đơn nhập hàng') %>
+            </button>
+            
+            
+        </div>
+       
+            
+    </div>
+    
+</form>
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/import/form.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

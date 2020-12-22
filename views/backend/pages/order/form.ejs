@@ -1,0 +1,110 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<form autocomplete="off" id="formOrder" class="" data-fv-framework="bootstrap4">
+    <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="col-md-8">
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <h4 class="card-title"><%= __('Danh sách sản phẩm') %></h4>
+                    <label class="col-md-3">Bao gồm</label>
+                    <div class="col-md-12">
+                        <div id="rowItemTuition">
+                            <div id="rowContent0" class="row mb-2">
+                        
+                            <!-- <div class="col-md-2">
+                                <div class="btn-delItemTuition">
+                                <a id="delSlotItem" data-index="0" class="removeItem" href="javascript:void(0)">
+                                    <%= __('Xoá') %>
+                                </a>
+                                </div>
+                            </div> -->
+                            
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <button id="addItemTuition" type="button" class="mt-10 btn btn-link"><%= __('Thêm sản phẩm') %></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <div class="col-md-12 grid-margin d-flex justify-content-between">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row align-items-md-center">
+                                <label class="col-md-5">Tổng tiền: </label>
+                                <div class="col-md-1"></div>
+                                <label id="totalPrice" class="col-md-4">0</label>
+                                <label class="col-md-2">đ</label>
+                            </div>
+                            <div class="form-group row align-items-md-center">                            
+                                <label class="col-md-5">Chiết khấu</label>
+                                <div class="col-md-1"></div>
+                                <input id="discount" name="discount" value="0" type="number" class="form-control col-md-4">
+                                <label class="col-md-2">%</label>
+                                <div class="col-md-6"></div>
+                                <label id="discountval" class="col-md-4">0</label>
+                                <label class="col-md-2">đ</label>                             
+                            </div>
+                            <div class="form-group row align-items-md-center">
+                                <label class="col-md-5"><b>Tổng hóa đơn: </b></label>
+                                <div class="col-md-1"></div>
+                                <label class="col-md-4" id="pay">0</label>
+                                <label class="col-md-2"><b>đ</b></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <h4 class="card-title"><%= __('Thông tin bán hàng') %></h4>
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Ngày bán</label>
+                        <div class="col-md-9">
+                            <input type="date" pattern= "^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" value=<%=currentDay%> id="description" class="form-control" rows="2" name="date" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Mã đơn bán hàng</label>
+                        <div class="col-md-9">
+                            <input type="text" id="code" class="form-control" name="code" value=<%=code%> readonly/>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group row align-items-md-center">
+                        <label class="col-md-3">Ghi chú</label>
+                        <div class="col-md-9">
+                            <textarea id="description" class="form-control" rows="2" name="description"></textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="alert d-none" style="text-align:center" role="alert">
+                <i class="mdi mdi-alert-circle"></i>
+            </div>
+            <button id="btnFormOrder" type="submit" class="btn btn-primary waves-effect waves-classic ">
+                <%= __('Tạo đơn bán hàng') %>
+            </button>
+            
+            
+        </div>
+       
+            
+    </div>
+    
+</form>
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/order/form.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

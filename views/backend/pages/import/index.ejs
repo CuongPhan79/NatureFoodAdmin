@@ -1,0 +1,38 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= __('Danh sách nhập hàng') %></h4>
+    <div class="row">
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="md-9">
+        </div>
+        <div class="md-3">
+          <a href="/backend/import/form" id="btnAdd" class="btn btn-primary btn-icon-text btn-sm text-uppercase">
+            <i class="mdi mdi-plus"></i>Tạo đơn nhập
+          </a>
+        </div>
+      </div>
+      <div class="col-md-12 grid-margin d-flex justify-content-between">
+        <div class="table-responsive">
+            <%- partial('./_list.ejs') %>
+        </div>
+      </div>
+           
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/import/index.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

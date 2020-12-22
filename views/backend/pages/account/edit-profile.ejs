@@ -1,0 +1,6 @@
+<!-- Page -->
+<% let BACKEND = sails.config.custom.BACKEND %>
+<%- partial('./_form-profile.ejs') %>
+<% block('localScripts', '<script src="/js/backend/account/index.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
