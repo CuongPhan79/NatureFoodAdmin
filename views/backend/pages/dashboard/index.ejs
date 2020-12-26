@@ -1,24 +1,82 @@
+<% let BACKEND = sails.config.custom.BACKEND %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
 <!--Row 1-->
-<h1 class="Display 1 text-light bg-dark pl-1">Chào mừng đến với EstorePro</h1>
+<h1 class="Display 1 text-light bg-dark pl-1">Chào mừng đến với NatureFooD</h1>
 <div class="row">
   
 	<div class="col-md-7 grid-margin stretch-card">
         <div class="card">
             <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-              <h4 class="card-title">Biểu đồ doanh số</h4>
-              <canvas id="barChart" style="display: block; height: 271px; width: 542px;" width="677" height="338" class="chartjs-render-monitor"></canvas>
+              <h4 class="card-title">Sản phẩm được mua nhiều trong tháng</h4>
+              <div class="row">
+                <div class="col-lg-12 js-height-scrollbar" style="height: 350px;">
+                  <%if(arrProductResult.length > 0){%>
+                    <table class="table table-striped">
+                      <tbody>
+                        <% _.each(arrProductResult, function (item, index) { %>
+                        <tr>  
+                          <td><img src="<%=item.product.image%>" width="50px"  class="img-sm rounded-circle"> <%= item.product.title %> </td>
+                          <td> <%= item.qty%></td>
+                        </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  <%}else{%>
+                    <div class="mail-contnet">
+                      <h5>Chưa có dữ liệu</h5>
+                    </div>
+                  <%}%>
+                </div>
+              </div>
+             
             </div>
           </div>
     </div>
     <div class="col-md-5 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <p class="card-title">Tổng doanh số</p>
-            <h1>1.562.322 đ</h1>
-            <h4>Mô tả doanh số</h4>
-            <div id="total-sales-chart-legend"></div>                  
+            <div class="row">
+              <div class="col-md-8 col-lg-8">
+                <h4 class="card-title">Doanh số bán</h2>
+              </div>
+              <div class="col-md-4 col-lg-4 col-select">
+                <select id="menuMonth" name="classes" class="form-control custom-select" data-placeholder="<%= __('Select class') %>">
+                  <!-- <option value=""><%= __('Select class') %></option> -->
+                  <% _.each(arrMonth, function (month, index) {%>
+                    <option value="<%= month.value %>" <%=currentMonth == month.value ?'selected':''%> >
+                      <%= month.title %>
+                    </option>
+                  <%})%>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 js-height-scrollbar" style="height: 350px;">
+                <div class="table-responsive">
+                  <table class="table table-hover dataTable" id="tblOrder">
+                    <thead>
+                        <tr class="table-header">
+                        <th width="25%">Đơn hàng đang chờ</th>
+                        <th width="25%">Đơn hàng đang giao</th>
+                        <th width="25%">Đơn hàng hoàn thành</th>
+                        <th width="25%">Tổng đơn hàng</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>                 
           </div>
-          <canvas id="total-sales-chart"></canvas>
         </div>
       </div>
 </div>
+
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/js/backend/dashboard/index.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %>

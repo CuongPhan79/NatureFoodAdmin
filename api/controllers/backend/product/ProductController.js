@@ -21,12 +21,10 @@ module.exports = {
       code: params.code,
       title: params.title, // REQUIRED
       status: 1, // REQUIRED
-      entryPrice: params.entryPrice,
       image: params.thumbnail,
       price: params.price,
       brand: params.brandbox,
       productType: params.productTypebox,
-      number: 0,
       description: params.description,
     };
     // ADD NEW DATA 
@@ -77,7 +75,6 @@ module.exports = {
       code: params.code,
       title: params.title, // REQUIRED
       status: params.status, // REQUIRED
-      entryPrice: params.entryPrice,
       image: params.thumbnail,
       price: params.price,
       brand: params.brandbox,
@@ -184,10 +181,8 @@ module.exports = {
       tmpData.code = product.code;
       tmpData.productType = product.productType.title ? product.productType.title : '-';
       tmpData.brand = product.brand.title ? product.brand.title : '-';
-      tmpData.entryPrice = (product.entryPrice) + ' đ';
       tmpData.price = product.price ? product.price + ' đ': '-';
       tmpData.tool = await sails.helpers.renderRowAction(product);
-      tmpData.number = product.number;
       tmpData.description = product.description;
       if (product.status == 0) {
         tmpData.status = '<label class="badge badge-warning">Lưu tạm</label>';
@@ -246,7 +241,6 @@ module.exports = {
       tmpData.code = product.code;
       tmpData.productType = product.productType.title ? product.productType.title : '-';
       tmpData.brand = product.brand.title ? product.brand.title : '-';
-      tmpData.entryPrice = (product.entryPrice) + ' đ';
       tmpData.price = product.price ? product.price + ' đ': '-';
       tmpData.tool = await sails.helpers.renderRowAction(product);
       tmpData.description = product.description;
@@ -283,7 +277,7 @@ module.exports = {
           for (let size of uploadConfig.SIZES) {
             let destFileName = filename[0] + '_' + size.name + '.' + filename[1];
             if (size.type == 'origin') {
-              Sharp(file.fd).resize(size.width)
+              Sharp(file.fd).resize(size.width).rotate()
                 .toFile(require('path').resolve(uploadConfig.PATH_FOLDER, 'assets/uploads/') + '/' + moment().format('YYYY/MM') + '/' + destFileName)
                 .then((info) => {}).catch((err) => { sails.log(err); });
               thumbnail.path = '/uploads/' + moment().format('YYYY/MM') + '/' + destFileName;
@@ -293,7 +287,7 @@ module.exports = {
               thumbnail.path = '/uploads/' + moment().format('YYYY/MM') + '/' + destFileName;
             } else {
               let type = size.type;
-              Sharp(file.fd).resize(size.width, size.height)
+              Sharp(file.fd).resize(size.width, size.height).rotate()
                 .toFile(require('path').resolve(uploadConfig.PATH_FOLDER, 'assets/uploads/') + '/' + moment().format('YYYY/MM') + '/' + destFileName)
                 .then((info) => { }).catch((err) => { sails.log(err); });
               thumbnail.sizes[type] = {
@@ -302,7 +296,7 @@ module.exports = {
               };
               let type2 = size.type;
               Sharp(file.fd).resize(size.width, size.height)
-                .toFile(require('path').resolve(uploadConfig.PATH_FOLDER, 'assets/uploads/') + '/' + moment().format('YYYY/MM') + '/' + destFileName)
+                .toFile(require('path').resolve(uploadConfig.PATH_FOLDER2, 'assets/uploads/') + '/' + moment().format('YYYY/MM') + '/' + destFileName)
                 .then((info) => { }).catch((err) => { sails.log(err); });
               thumbnail.sizes[type2] = {
                 width: size.width, height: size.height,

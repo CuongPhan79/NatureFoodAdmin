@@ -169,7 +169,6 @@ module.exports = {
       tmpData.birthday = customer.birthday;
       tmpData.emailAddress = customer.emailAddress;
       tmpData.phone = customer.phone;
-      tmpData.address = customer.address;
       tmpData.tool = await sails.helpers.renderRowAction(customer);
       resCustomer.push(tmpData);
     };

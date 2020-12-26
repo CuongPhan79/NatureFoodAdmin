@@ -1,0 +1,108 @@
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/formvalidation/formValidation.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/dropify/dropify.min.css">') %>
+<% block('localCss', '<link rel="stylesheet" href="/vendors/select2/select2.min.css">') %>
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5>Đơn hàng <%=orderObj.id%></h5> 
+                        <h6 class="text-secondary">Đặt ngày <%=orderObj.orderDate%></h6>
+                    </div>
+                    <div class="col-md-3">
+                        <h4 class="text-right">Tổng cộng: <%=orderObj.informationReceived.cart.totalPrice%> đ</h4>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <tbody>
+                            <% _.each(orderObj.informationReceived.cart.items, function (item, index) { %>
+                            <tr>
+                                <td width="40%"><img src="<%=item.product.image%>" width="50px"  class="img-sm rounded-circle"> <%= item.product.title %> </td>
+                                <td width="30%"> <%= item.product.price %> đ</td>
+                                <td width="30%"> Số lượng: <%= item.qty %></td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Họ tên người nhận hàng: <%=orderObj.informationReceived.shipping.fullName%></h6>
+                    <h6>Số điện thoại người nhận hàng: <%=orderObj.informationReceived.shipping.phone%></h6>
+                    <h6>Địa chỉ: <%=orderObj.informationReceived.shipping.address%></h6>
+                    <h6>Loại địa chỉ: <%if(orderObj.informationReceived.shipping.type == 0){%>
+                        Nhà riêng / chung cư
+                        <%}else{%>
+                            Cơ quan / công ty
+                        <%}%> 
+                    </h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body border-bottom">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6">Tạm tính</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 id="priceCart" class="text-right"><%=orderObj.informationReceived.cart.totalPrice%> đ</h6>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h6>Tổng cộng</h6>
+                            <h6>Thanh toán bằng hình thức <%if(orderObj.typePayment == 0){%>
+                                Thanh toán khi nhận hàng
+                                <%}else{%>
+                                    Thanh toán qua Paypal
+                                <%}%> </h6>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-right" id="totalPriceCart" ><%=orderObj.informationReceived.cart.totalPrice%> đ</h4>
+                        </div>
+                       
+                    </div>
+                </div>
+                <%if(orderObj.status==0) {%>
+                <div class="modal-footer row-button-fluid">
+                    <button data-id="<%=orderObj.id%>" id= "change-status-row" class="btn btn-primary waves-effect waves-classic">Duyệt</button>
+                </div>
+                <%}else if(orderObj.status==1){%>
+                    <div class="modal-footer row-button-fluid">
+                        <button data-id="<%=orderObj.id%>" id= "change-status-row" class="btn btn-primary waves-effect waves-classic">Hoàn thành</button>
+                    </div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<% block('localScripts', '<script src="/vendors/select2/select2.full.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/formValidation.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/formvalidation/framework/bootstrap4.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/sweetalert/sweetalert.min.js"></script>') %>
+<% block('localScripts', '<script src="/vendors/select2/select2.js"></script>') %></div>
+<% block('localScripts', '<script src="/js/backend/order/index.js"></script>') %>

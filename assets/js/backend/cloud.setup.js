@@ -69,7 +69,7 @@ Cloud.setup({
         "addProduct": {
             "verb": "POST",
             "url": "/api/v1/backend/product/add",
-            "args": ["code","title","description", "status", "brandbox", "entryPrice", "price", "productTypebox"]
+            "args": ["code","title","description", "status", "brandbox", "price", "productTypebox"]
         },
         "getProduct": {
             "verb": "GET",

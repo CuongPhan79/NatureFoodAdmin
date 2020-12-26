@@ -107,16 +107,6 @@ class FormIndexImportBackendEKP {
                 </div>
               </div>`
           );
-          await $.ajax({url: "/api/v1/backend/product/search2", success: async function(result){
-            for(let i =0; i< result.data.length;i++) {
-              $("#titleSlotItem"+index).append(
-                  `<option value="${result.data[i].id}"> 
-                    ${result.data[i].title}  (${result.data[i].entryPrice})
-                  </option>`
-              );
-              $("#titleSlotItem"+index).select2();
-            }
-          }});
           await $("#delSlotItem"+index).click(async function() {
             let index = $(this).attr('data-index');
               $('#itemProduct' + index).remove();

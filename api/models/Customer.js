@@ -37,11 +37,6 @@ module.exports = {
       protect: true,
       example: '2$28a8eabna301089103-13948134nad'
     },
-    address: {
-      type: 'string',
-      description: 'The User address',
-      example: 'abc street, ward 5, Ho Chi Minh City'
-    },
     orders: {
       collection: 'order',
       via: 'customer'

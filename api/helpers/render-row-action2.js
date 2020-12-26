@@ -24,6 +24,11 @@ module.exports = {
           </button>
           <ul class="dropdown-menu">
             <li>
+              <a href="/backend/order/detail/${jsonObject.id}" data-id="${jsonObject.id}" class="change-detail-row">
+                <i class="mdi mdi mdi-calendar"></i> Chi tiết
+              </a>  
+            </li>
+            <li>
               <a href="javascript:void(0);" data-id="${jsonObject.id}" class="change-status-row">
                 <i class="mdi mdi-check"></i> Duyệt
               </a>
@@ -39,6 +44,11 @@ module.exports = {
           </button>
           <ul class="dropdown-menu">
             <li>
+              <a href="/backend/order/detail/${jsonObject.id}" data-id="${jsonObject.id}" class="change-detail-row">
+                <i class="mdi mdi mdi-calendar"></i> Chi tiết
+              </a>  
+            </li>
+            <li>
               <a href="javascript:void(0);" data-id="${jsonObject.id}" class="change-status-row">
                 <i class="mdi mdi-briefcase-check"></i> Hoàn thành
               </a>
@@ -49,14 +59,14 @@ module.exports = {
     } else  {
         result=  `<div class="btn-group-action">				
         <div class="btn-group pull-right">
-          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" disable>
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             <i class="icon-caret-down"></i>
           </button>
           <ul class="dropdown-menu">
             <li>
-              <a href="javascript:void(0);" data-id="${jsonObject.id}" class="change-status-row">
-                <i class="mdi mdi-briefcase-check"></i> Hoàn thành
-              </a>
+              <a href="/backend/order/detail/${jsonObject.id}" data-id="${jsonObject.id}" class="change-detail-row">
+                <i class="mdi mdi mdi-calendar"></i> Chi tiết
+              </a>  
             </li>
           </ul>
         </div>

@@ -156,27 +156,10 @@ class ListIndexOrderBackendEKP {
 
 	handleItemActions() {
 		let _this = this;
-
-		//ONCLICK EDIT LINK
-    //   _this.tableObj.on('click', '.edit-row', function (e) {
-    //     e.preventDefault();
-    //     let id = $(this).attr('data-id');
-    //     //get AJAX data
-    //     Cloud.getProduct.with({ id: id }).protocol('jQuery').exec((err, responseBody, responseObjLikeJqXHR) => {
-    //       if (err) {
-    //         console.log(err);
-    //         return;
-    //       }
-    //       //AJAX success 
-    //       let _data = responseBody;
-    //       let _currentForm = window.curBackendEKP.form;
-    //       //Render data from response to form
-    //       _currentForm.renderFormData('edit', _data);
-    //       $('#brandbox').select2();
-    //       $('#productTypebox').select2();
-    //     })
-    //   });
-      //END END ONCLICK EDIT LINK
+		$('#change-status-row').on('click', function (e) {
+			let id = $(this).attr('data-id');
+			_this.initSweetAlert(id);
+		})
 
 		// ONCLICK REMOVE (TRASH) LINK
 		_this.tableObj.on('click', '.change-status-row', function (e) {

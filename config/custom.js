@@ -64,18 +64,18 @@ module.exports.custom = {
         name: '150x150',
         type: 'thumbnail'
       },
-      // {
-      //   width: 240, height: 135,
-      //   name: '240x135',
-      //   type: 'medium'
-      // },
+      {
+        width: 400, height: 400,
+        name: '400x400',
+        type: 'medium'
+      },
       // {
       //   width: 400, height: 270,
       //   name: '400x270',
       //   type: 'medium_large'
       // }
     ],
-    PATH_FOLDER: process.env.PATH_FOLDER || '/HK1Nam4/TLCN/EstorePro/',
-    PATH_FOLDER2: process.env.PATH_FOLDER || '/HK1Nam4/TLCN/EstoreProOnline/'
+    PATH_FOLDER: process.env.PATH_FOLDER || '/NatureFooDAdmin/',
+    PATH_FOLDER2: process.env.PATH_FOLDER2 || '/NatureFooD/'
   }
 };

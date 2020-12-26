@@ -56,23 +56,6 @@ data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" dat
           <div class="row">
             <div class="col-md-6">
               <div class="form-group row align-items-md-center">
-                <label class="col-md-3">Giá nhập</label>
-                <div class="col-md-9">
-                  <div class="input-group">
-                    <input type="number" id="entryPrice" class="form-control" name="entryPrice" value="<%=(productObj.entryPrice) ? productObj.entryPrice : ''%>"
-                    data-fv-message="<%= __('Giá nhập là số') %>"
-                    data-fv-notempty="true" data-fv-notempty-message="<%= __('Giá nhập là trường bắt buộc') %>"
-                    max="10000000" min="0" data-fv-lessThan-message="<%= __('Số tiền tối đa là 10000000') %>" data-fv-greaterThan-message="<%= __('Số tiền tối thiểu là 0') %>" required>
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">đ
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row align-items-md-center">
                 <label class="col-md-3">Giá bán</label>
                 <div class="col-md-9">
                   <div class="input-group">
@@ -85,6 +68,14 @@ data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" dat
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row align-items-md-center">
+                <label class="col-md-3">Mô tả</label>
+                <div class="col-md-9">
+                  <input id="description" class="form-control" rows="2" name="description" value="<%=(productObj.description) ? productObj.description : ''%>">
                 </div>
               </div>
             </div>
@@ -134,14 +125,6 @@ data-fv-icon-validating="glyphicon glyphicon-refresh" data-fv-live="enabled" dat
             </div>
           </div>
           <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row align-items-md-center">
-                  <label class="col-md-3">Mô tả</label>
-                  <div class="col-md-9">
-                    <input id="description" class="form-control" rows="2" name="description" value="<%=(productObj.description) ? productObj.description : ''%>">
-                  </div>
-                </div>
-              </div>
               <div class="col-md-6">
                   <div class="form-group row align-items-md-center">
                     <label class="col-md-3">Trạng thái</label>

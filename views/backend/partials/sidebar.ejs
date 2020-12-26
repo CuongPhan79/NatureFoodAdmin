@@ -28,7 +28,7 @@ action = action.replace(/\//g, '-'); //replace '/' by '-';
     </li>
     <%}%>
     <li
-      class="nav-item <%= ( action == 'backend-order-index') ? 'active' : '' %>">
+      class="nav-item <%= ( action == 'backend-order-index' || action == 'backend-order-detail') ? 'active' : '' %>">
       <a class="nav-link" href="/backend/order/index">
         <i class="mdi mdi-border-all menu-icon"></i>
         <span class="menu-title"><%= __('Quản lý đơn hàng') %></span>
@@ -39,39 +39,6 @@ action = action.replace(/\//g, '-'); //replace '/' by '-';
       <a class="nav-link" href="/backend/customer/index">
         <i class="mdi mdi mdi-account-settings menu-icon"></i>
         <span class="menu-title"><%= __('Khách hàng') %></span>
-      </a>
-    </li>
-    <li
-      class="nav-item <%= ( action == 'backend-order-form') ? 'active' : '' %>">
-      <a class="nav-link" href="/backend/order/form">
-        <i class="mdi mdi-cart menu-icon"></i>
-        <span class="menu-title"><%= __('Bán hàng') %></span>
-      </a>
-    </li>
-     <li
-      class="nav-item <%= ( action == 'backend-import-form'||action == 'backend-supplier-index' || action == 'backend-import-index') ? 'active' : '' %>">
-      <a class="nav-link" data-toggle="collapse" href="#imports" aria-controls="imports">
-        <i class="mdi mdi-truck-delivery menu-icon" ></i>
-        <span class="menu-title"><%= __('Nhập hàng') %></span>
-        <i class="menu-arrow"></i>
-      </a>
-      <div class="collapse <%= (action == 'backend-import-form' || action == 'backend-supplier-index' || action == 'backend-import-index') ? 'show' : '' %>" id="imports">
-        <ul class="nav flex-column sub-menu">
-          <%if(userActive.userType==0){%>
-          <li class="nav-item"><a class="nav-link <%= (action == 'backend-supplier-index') ? 'active' : '' %>"  href="/backend/supplier/index">Nhà cung cấp</a></li> 
-          <%}%>
-          <li class="nav-item"><a class="nav-link <%= (action == 'backend-import-form') ? 'active' : '' %>"  href="/backend/import/form">Hóa đơn nhập</a></li>   
-          <%if(userActive.userType==0){%>
-            <li class="nav-item"><a class="nav-link <%= (action == 'backend-import-index') ? 'active' : '' %>"  href="/backend/import/index">Danh sách nhập hàng</a></li> 
-          <%}%>      
-        </ul>
-      </div>
-    </li>
-    <li
-      class="nav-item ">
-      <a class="nav-link" href="/backend/chart">
-        <i class="mdi mdi-chart-bar menu-icon"></i>
-        <span class="menu-title"><%= __('Thống kê') %></span>
       </a>
     </li>
     
