@@ -110,6 +110,56 @@ class ListIndexOrderBackendEKP {
 		});
 	}
 
+	initSweetAlert1(id) {
+		swal({
+			title: 'Bạn có muốn thực hiện ?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3f51b5',
+			cancelButtonColor: '#ff4081',
+			confirmButtonText: 'Great ',
+			buttons: {
+				cancel: {
+					text: "Hủy",
+					value: null,
+					visible: true,
+					className: "btn btn-danger",
+					closeModal: true,
+				},
+				confirm: {
+					text: "OK",
+					value: true,
+					visible: true,
+					className: "btn btn-primary",
+					closeModal: true
+				}
+			}
+		}).then((value) => {
+			if (value) {
+				Cloud.changeStatus1.with({ id: id }).protocol('jQuery').exec((err, responseBody, responseObjLikeJqXHR) => {
+					if (err) {
+						console.log(err);
+						return;
+					} else if (responseBody) {
+						swal({
+							title: 'Thành công !',
+							icon: 'success',
+							button: {
+								text: "Tiếp tục",
+								value: true,
+								visible: true,
+								className: "btn btn-primary"
+							}
+						}).then((value) => {
+							//THEN RELOAD PAGE IF NEEDED 
+							location.reload();
+						})
+					}
+				})
+			}
+		});
+	}
+
 	initDataTable() {
 		let _this = this;
 		let params = {};
@@ -165,6 +215,16 @@ class ListIndexOrderBackendEKP {
 		_this.tableObj.on('click', '.change-status-row', function (e) {
 			let id = $(this).attr('data-id');
 			_this.initSweetAlert(id);
+		});
+		$('#change-status-row1').on('click', function (e) {
+			let id = $(this).attr('data-id');
+			_this.initSweetAlert1(id);
+		})
+
+		// ONCLICK REMOVE (TRASH) LINK
+		_this.tableObj.on('click', '.change-status-row1', function (e) {
+			let id = $(this).attr('data-id');
+			_this.initSweetAlert1(id);
 		});
 	}
 

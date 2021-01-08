@@ -45,6 +45,14 @@
                   </span>
                 </a>
               </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link <% if(status == 3) {%> active <% } %>" href="?status=3">
+                  <%= __('Đã hủy') %>
+                  <span class="badge badge-pill <%=(status == 3)? 'badge-primary':'badge-outline-primary' %>">
+                    <%= totalTrash %>
+                  </span>
+                </a>
+              </li>
             </ul>
             <div class="md-3">
             </div>

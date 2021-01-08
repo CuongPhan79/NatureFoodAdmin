@@ -18,6 +18,7 @@ module.exports = {
       let totalUnapproved = await OrderService.count({ status: 0 });
       let totalApproved = await OrderService.count({ status: 1});
       let totalDone = await OrderService.count({ status: 2});
+      let totalTrash = await OrderService.count({ status: 3});
       let customers = await CustomerService.find();
         let _default = await sails.helpers.getDefaultData(this.req);
         let params = this.req.allParams();
@@ -27,6 +28,7 @@ module.exports = {
       _default.totalUnapproved = totalUnapproved;
       _default.totalApproved = totalApproved;
       _default.totalDone = totalDone;
+      _default.totalTrash = totalTrash;
       _default.status = status;
       _default.currentDay = moment().format('YYYY-MM-DD');
       sails.log.info("================================ controllers/backend/list => TYPE ================================");

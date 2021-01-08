@@ -5,7 +5,7 @@ module.exports = {
         sails.log.info("================================ DashBoardController.searchOrder => START ================================");
         let params = req.allParams();
         let currentYear = moment().format('YYYY');
-        month = params.month ?  params.month : moment().format('YYYY');
+        month = params.month ?  '0'+params.month : moment().format('MM');
         let arrCout = [];
         let total = await OrderService.count({
             and: 
@@ -36,11 +36,19 @@ module.exports = {
             status: 2
         }
         ]});
+        let totalTrash = await OrderService.count({and: [{
+            orderDate: {
+                contains: currentYear + "-" + month
+            },
+            status: 3
+        }
+        ]});
         let tmpData = {
             total: total,
             totalDone: totalDone,
             totalUnapproved: totalUnapproved,
-            totalApproved: totalApproved
+            totalApproved: totalApproved,
+            totalTrash: totalTrash
         }
         arrCout.push(tmpData);
         return res.ok({data: arrCout });

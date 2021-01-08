@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-9">
-                        <h5>Đơn hàng <%=orderObj.id%></h5> 
+                        <h5>Đơn hàng <%=orderObj.code%></h5> 
                         <h6 class="text-secondary">Đặt ngày <%=orderObj.orderDate%></h6>
                     </div>
                     <div class="col-md-3">
@@ -86,7 +86,9 @@
                 </div>
                 <%if(orderObj.status==0) {%>
                 <div class="modal-footer row-button-fluid">
+                    <button data-id="<%=orderObj.id%>" id= "change-status-row1" class="btn btn-danger waves-effect waves-classic">Hủy đơn</button>
                     <button data-id="<%=orderObj.id%>" id= "change-status-row" class="btn btn-primary waves-effect waves-classic">Duyệt</button>
+                    
                 </div>
                 <%}else if(orderObj.status==1){%>
                     <div class="modal-footer row-button-fluid">

@@ -14,9 +14,9 @@ module.exports = {
       if (!this.req.me) {
         throw { redirect: '/backend/login' };
       }
-      let currentMonth = parseInt(moment().format('MM'));
+      let currentMonth = moment().format('MM');
       let currentYear = moment().format('YYYY');
-      let arrMonth = [{title: "Tháng 1", value: 1},{title: "Tháng 2", value: 2},{title: "Tháng 3", value: 3},{title: "Tháng 3", value: 3},{title: "Tháng 4", value: 4},{title: "Tháng 5", value: 5},{title: "Tháng 6", value: 6},{title: "Tháng 7", value: 7},{title: "Tháng 8", value: 8},{title: "Tháng 8", value: 8},{title: "Tháng 9", value: 9},{title: "Tháng 10", value: 10},{title: "Tháng 11", value: 11},{title: "Tháng 12", value: 12}];
+      let arrMonth = [{title: "Tháng 1", value: 01},{title: "Tháng 2", value: 02},{title: "Tháng 3", value: 03},{title: "Tháng 4", value: 04},{title: "Tháng 5", value: 05},{title: "Tháng 6", value: 06},{title: "Tháng 7", value: 07},{title: "Tháng 8", value: 08},{title: "Tháng 9", value: 09},{title: "Tháng 10", value: 10},{title: "Tháng 11", value: 11},{title: "Tháng 12", value: 12}];
       let orders = await OrderService.find({or: [{
         orderDate: {
           contains: currentYear+"-"+currentMonth

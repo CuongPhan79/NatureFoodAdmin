@@ -33,6 +33,11 @@ module.exports = {
                 <i class="mdi mdi-check"></i> Duyệt
               </a>
             </li>
+            <li>
+              <a href="javascript:void(0);" data-id="${jsonObject.id}" class="change-status-row1">
+                  <i class="mdi mdi-check"></i> Hủy đơn
+              </a>
+            <li>
           </ul>
         </div>
       </div>`

@@ -34,6 +34,7 @@ class ViewIndexDashboardBackendEKP {
                     { "data": "totalUnapproved" },
                     { "data": "totalApproved" },
                     { "data": "totalDone" },
+                    { "data": "totalTrash" },
                     { "data": "total" },
                 ],
                 //Define first column without order
@@ -72,6 +73,7 @@ class ViewIndexDashboardBackendEKP {
                     { "data": "totalUnapproved" },
                     { "data": "totalApproved" },
                     { "data": "totalDone" },
+                    { "data": "totalTrash" },
                     { "data": "total" },
                 ],
               //Define first column without order

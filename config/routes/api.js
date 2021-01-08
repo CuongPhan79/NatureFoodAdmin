@@ -46,6 +46,7 @@ module.exports.api = {
     'GET /api/v1/backend/order/seacrh': { controller: 'backend/order/OrderController', action: 'search' },
     'POST /api/v1/backend/order/add': { controller: 'backend/order/OrderController', action: 'add' },
     'PATCH /api/v1/backend/order/changeStatus': { controller: 'backend/order/OrderController', action: 'changeStatus' },
+    'PATCH /api/v1/backend/order/changeStatus1': { controller: 'backend/order/OrderController', action: 'changeStatus1' },
     
     //USER
     'POST /api/v1/backend/user/add': { controller: 'backend/user/UserController', action: 'add' },

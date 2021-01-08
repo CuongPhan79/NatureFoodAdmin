@@ -157,6 +157,8 @@ module.exports = {
     }
   //END IF TITLE
     let arrObjProduct = await ProductService.find(where, limit, skip, sort);
+    const currencyFormat = num => (Math.round(num * 1000) / 1000).toFixed(',').replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    this.currencyFormat = currencyFormat;
     //RESPONSE
     let resProduct= []; 
     for (let product of arrObjProduct) {
@@ -181,7 +183,7 @@ module.exports = {
       tmpData.code = product.code;
       tmpData.productType = product.productType.title ? product.productType.title : '-';
       tmpData.brand = product.brand.title ? product.brand.title : '-';
-      tmpData.price = product.price ? product.price + ' đ': '-';
+      tmpData.price = product.price ? this.currencyFormat(product.price) + ' đ': '-';
       tmpData.tool = await sails.helpers.renderRowAction(product);
       tmpData.description = product.description;
       if (product.status == 0) {

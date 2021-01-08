@@ -62,13 +62,15 @@ module.exports = {
         let where = {
         };
       //find only active status
-        if(status) {
+        if(status || status == 0) {
             where = {
                 status: status
             }
         }      
       //END IF TITLE
         let arrObjOrder = await OrderService.find(where, limit, skip, sort);
+        const currencyFormat = num => (Math.round(num * 1000) / 1000).toFixed(',').replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        this.currencyFormat = currencyFormat;
         //RESPONSE
         let resOrder= []; 
         for (let order of arrObjOrder) {
@@ -77,10 +79,10 @@ module.exports = {
                 listProduct.push(product.title);
             }
             let tmpData = {};
-            tmpData.code = order.id;
+            tmpData.code = order.code;
             tmpData.orderDate = moment(order.orderDate, 'YYYY-MM-DD').format('DD/MM/YYYY');
             tmpData.listProduct = listProduct.join(', ');
-            tmpData.totalPrice = order.informationReceived.cart.totalPrice;
+            tmpData.totalPrice = this.currencyFormat(order.informationReceived.cart.totalPrice) + ' đ';
             tmpData.nameCustomer = order.informationReceived.shipping.fullName;
             tmpData.typePayment = (order.typePayment == 0) ?   `<div class="d-flex align-items-center">
             <img src="/images/payment.png" alt="profile" class="img-sm rounded-circle">
@@ -94,6 +96,8 @@ module.exports = {
                 tmpData.status = '<label class="badge badge-warning">Chưa xác nhận</label>';
             } else if (order.status == 1) {
                 tmpData.status = '<label class="badge badge-success">Đang giao</label>';
+            } else if (order.status == 3) {
+                tmpData.status = '<label class="badge badge-danger">Đã hủy</label>';
             } else {
                 tmpData.status = '<label class="badge badge-light">Hoàn thành</label>';
             }
@@ -115,6 +119,16 @@ module.exports = {
         } else if (dataObj.status == 1) {
             await Order.update(params.id).set({status: 2});
         }
+        return res.ok();
+    },
+    changeStatus1: async (req, res) => {
+        sails.log.info("================================ ProductController.trash => START ================================");
+        let params = req.allParams();
+        if (!params.id) return res.badRequest(ErrorService.PRODUCT_ID_REQUIRED);
+        // Call constructor with custom options:
+        let dataObj = await OrderService.get({ id: params.id });
+        if (!dataObj) return res.notFound(ErrorService.ERR_NOT_FOUND);
+        await Order.update(params.id).set({status: 3});
         return res.ok();
     },
 }

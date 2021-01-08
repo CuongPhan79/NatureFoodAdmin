@@ -166,9 +166,10 @@ module.exports = {
       let tmpData = {};
       tmpData.name = name;
       tmpData.gender = gender;
-      tmpData.birthday = customer.birthday;
+      tmpData.birthday = customer.birthday ? customer.birthday : '-';
       tmpData.emailAddress = customer.emailAddress;
-      tmpData.phone = customer.phone;
+      tmpData.phone = customer.phone ? customer.phone : '-';
+      tmpData.address = customer.address ? customer.address : '-';
       tmpData.tool = await sails.helpers.renderRowAction(customer);
       resCustomer.push(tmpData);
     };

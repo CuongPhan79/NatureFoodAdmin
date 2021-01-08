@@ -135,6 +135,12 @@ Cloud.setup({
             "args": []
         },
         //-------------------------ORDER----------------
+        "changeStatus1": {
+            "verb": "PATCH",
+            "url": "/api/v1/backend/order/changeStatus1",
+            "args": []
+        },
+        //-------------------------ORDER----------------
         //USER
         "addUser": {
             "verb": "POST",
