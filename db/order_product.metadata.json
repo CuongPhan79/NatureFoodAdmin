@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"estoreprodb.order_product"}],"uuid":"bb95e64c0c784a4789536771c1d8a73a"}
