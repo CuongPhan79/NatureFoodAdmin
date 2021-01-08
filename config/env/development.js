@@ -75,7 +75,7 @@ module.exports = {
       host: '127.0.0.1', // defaults to `localhost` if omitted
       // host: '[fe80::7dc9:c7f3:586e:8e7d]', // link to MongoDB server 
       port: 27017, // defaults to 27017 if omitted 
-      database: 'estoreprodb' // or omit if not relevant 
+      database: 'naturefood' // or omit if not relevant 
     },
 
   },
